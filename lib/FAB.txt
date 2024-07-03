@@ -1,0 +1,135 @@
+// class HomePage extends StatefulWidget {
+//   @override
+//   _HomePageState createState() => _HomePageState();
+// }
+
+// class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+//   bool _isFabVisible = true;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     WidgetsBinding.instance.addObserver(this);
+//   }
+
+//   @override
+//   void dispose() {
+//     WidgetsBinding.instance.removeObserver(this);
+//     super.dispose();
+//   }
+
+//   @override
+//   void didChangeAppLifecycleState(AppLifecycleState state) {
+//     if (state == AppLifecycleState.resumed) {
+//       setState(() {
+//         _isFabVisible = true;
+//       });
+//     } else if (state == AppLifecycleState.inactive ||
+//         state == AppLifecycleState.paused) {
+//       setState(() {
+//         _isFabVisible = false;
+//       });
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('App Name'),
+//         leading: IconButton(
+//           icon: Icon(Icons.menu),
+//           onPressed: () {
+//             // Handle menu action
+//           },
+//         ),
+//       ),
+//       body: SingleChildScrollView(
+//         child: Padding(
+//           padding: const EdgeInsets.all(16.0),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text('Hello, Rafey',
+//                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+//               SizedBox(height: 20),
+//               Text('Continue Reading', style: TextStyle(fontSize: 18)),
+//               SizedBox(height: 20),
+//             ],
+//           ),
+//         ),
+//       ),
+//       bottomNavigationBar: BottomNavigationBar(
+//         items: [
+//           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+//           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Community'),
+//           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+//         ],
+//       ),
+//       floatingActionButton: FabCircularMenu(
+//         children: <Widget>[
+//           Container(
+//             height: 70,
+//             width: 40,
+//             child: Image(
+//               image: NetworkImage(
+//                 "https://m.media-amazon.com/images/I/81LVEH25iJL._AC_UF1000,1000_QL80_.jpg",
+//               ),
+//             ),
+//           ),
+//           Container(
+//             height: 70,
+//             width: 40,
+//             child: Image(
+//               image: NetworkImage(
+//                 "https://m.media-amazon.com/images/I/81LVEH25iJL._AC_UF1000,1000_QL80_.jpg",
+//               ),
+//             ),
+//           ),
+//           Container(
+//             height: 70,
+//             width: 40,
+//             child: Image(
+//               image: NetworkImage(
+//                 "https://m.media-amazon.com/images/I/81LVEH25iJL._AC_UF1000,1000_QL80_.jpg",
+//               ),
+//             ),
+//           ),
+//           Container(
+//             height: 70,
+//             width: 40,
+//             child: Image(
+//               image: NetworkImage(
+//                 "https://m.media-amazon.com/images/I/81LVEH25iJL._AC_UF1000,1000_QL80_.jpg",
+//               ),
+//             ),
+//           ),
+//         ],
+//         ringColor: Colors.white24,
+//         alignment: Alignment.centerRight,
+//         ringDiameter: 500,
+//         fabOpenColor: Color.fromARGB(255, 223, 113, 54),
+//       ),
+//     );
+//   }
+// }
+
+// Widget MenuTile() {
+//   return Container(
+//     child: Column(
+//       children: [
+//         Container(
+//           height: 30,
+//           width: 20,
+//           child: Image(
+//             image: NetworkImage(
+//               "https://m.media-amazon.com/images/I/81LVEH25iJL._AC_UF1000,1000_QL80_.jpg",
+//             ),
+//           ),
+//         ),
+//         Text("The Kite Runner"),
+//         Text("by Khalid Husseini"),
+//       ],
+//     ),
+//   );
+// }

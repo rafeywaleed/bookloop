@@ -1,0 +1,191 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  double angle = 0;
+  final List<double> snapAngles = [0, pi / 2, pi, 3 * pi / 2];
+
+  void _onPanUpdate(DragUpdateDetails details) {
+    setState(() {
+      angle -= details.delta.dy * 0.01;
+    });
+  }
+
+  void _onPanEnd(DragEndDetails details) {
+    setState(() {
+      angle = _getSnappedAngle(angle);
+    });
+  }
+
+  double _getSnappedAngle(double currentAngle) {
+    double closestAngle = snapAngles[0];
+    double minDifference = (currentAngle - snapAngles[0]).abs();
+
+    for (double snapAngle in snapAngles) {
+      double difference = (currentAngle - snapAngle).abs();
+      if (difference < minDifference) {
+        minDifference = difference;
+        closestAngle = snapAngle;
+      }
+    }
+
+    return closestAngle;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(Icons.book),
+        title: Text(
+          "[AppName]",
+        ),
+      ),
+      backgroundColor: Color(0xFFE4D9D3),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Hello, Rafey',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Text('Continue Reading', style: TextStyle(fontSize: 18)),
+              SizedBox(height: 100),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Community'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: -150, // Adjust to align the wheel at the right border
+            bottom: MediaQuery.of(context).size.height / 2 -
+                150, // Center vertically
+            child: GestureDetector(
+              onPanUpdate: _onPanUpdate,
+              onPanEnd: _onPanEnd,
+              child: Center(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: 350,
+                      height: 350,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFFC38560).withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(4, 4),
+                                blurRadius: 8,
+                                spreadRadius: 1)
+                          ]),
+                      child: Transform.rotate(
+                        angle: angle,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            MenuTile(0),
+                            MenuTile(pi / 2),
+                            MenuTile(pi),
+                            MenuTile(3 * pi / 2),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Center Circle
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFFE4D9D3),
+                      ),
+                      child: Center(
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors
+                                  .red, // Different color for the center circle
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(4, 4),
+                                    blurRadius: 8,
+                                    spreadRadius: 1)
+                              ]),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget MenuTile(double angle) {
+  return Transform(
+    transform: Matrix4.identity()
+      ..translate(100.0 * cos(angle),
+          100.0 * sin(angle)), // Adjust distance from center
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 60, // Adjusted height for better visibility
+          width: 30, // Adjusted width for better visibility
+          child: Image(
+            image: NetworkImage(
+              "https://m.media-amazon.com/images/I/81LVEH25iJL._AC_UF1000,1000_QL80_.jpg",
+            ),
+            fit: BoxFit.cover, // Ensure the image fits within the container
+          ),
+        ),
+        SizedBox(height: 5), // Spacer for spacing between image and text
+        Text(
+          "The Kite Runner",
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center, // Center-align the text
+        ),
+      ],
+    ),
+  );
+}
