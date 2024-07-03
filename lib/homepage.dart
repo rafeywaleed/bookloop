@@ -156,9 +156,9 @@ class _HomePageState extends State<HomePage> {
                                   .isbn,
                               type: recentBooks[leftbook_jugaad(leftmostbook)]
                                   .type),
-                          type: PageTransitionType.scale,
-                          alignment: Alignment.topLeft,
-                          curve: Curves.bounceInOut,
+                          type: PageTransitionType.bottomToTop,
+                          // alignment: Alignment.topLeft,
+                          curve: Curves.easeIn,
                           duration: Durations.medium4));
                 },
                 child: Container(
