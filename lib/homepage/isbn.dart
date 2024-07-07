@@ -228,7 +228,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                   right: 15,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       color: Color(0xFF445C74),
                     ),
                     child: Padding(
@@ -244,7 +244,8 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                       ),
                     ),
                   ))
-              : Positioned(
+              : Container(),
+              Positioned(
                   bottom: 0,
                   left: 0,
                   right: 0,

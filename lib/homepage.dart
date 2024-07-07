@@ -1,10 +1,11 @@
+import 'package:bookloop/homepage/book_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import '/isbn.dart';
+import 'homepage/isbn.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       bookName: "The Kite Runner",
       author: "Khaled Hosseini",
       isbn: "9780747573395",
-      type: 'print book',
+      type: 'e-book',
     ),
     Book(
       imgUrl:
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       bookName: "A Thousand Splendid Suns",
       author: "Khaled Hosseini",
       isbn: "9780747582977",
-      type: 'e-book',
+      type: 'print book',
     ),
     Book(
       imgUrl:
@@ -114,31 +115,54 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color(0xFFE4D9D3),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hello',
-                style: GoogleFonts.plusJakartaSans(
-                    textStyle: Theme.of(context).textTheme.displayLarge,
-                    fontSize: 48,
-                    fontWeight: FontWeight.normal,
-                    color: Color(0xFF8D3F33)),
-              ),
-              Text(
-                '     Rafey',
-                style: GoogleFonts.plusJakartaSans(
-                    textStyle: Theme.of(context).textTheme.displayLarge,
-                    fontSize: 48,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF8D3F33)),
+              RichText(
+                text: TextSpan(
+                    text: "Good Evening,\n",
+                    style: GoogleFonts.plusJakartaSans(
+                        textStyle: Theme.of(context).textTheme.displayLarge,
+                        fontSize: 40,
+                        fontWeight: FontWeight.normal,
+                        color: Color(0xFF8D3F33)),
+                    children: [
+                      TextSpan(
+                        text: "Rafey",
+                        style: GoogleFonts.plusJakartaSans(
+                            textStyle: Theme.of(context).textTheme.displayLarge,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF8D3F33)),
+                      )
+                    ]),
               ),
               SizedBox(height: 20),
               Text('Continue Reading', style: TextStyle(fontSize: 18)),
-              SizedBox(height: 50),
+              SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BookDialog(
+                        cover: Image.network(
+                            recentBooks[leftbook_jugaad(leftmostbook)].imgUrl),
+                        title:
+                            recentBooks[leftbook_jugaad(leftmostbook)].bookName,
+                        author:
+                            recentBooks[leftbook_jugaad(leftmostbook)].author,
+                        type: recentBooks[leftbook_jugaad(leftmostbook)].type,
+                        isbn: recentBooks[leftbook_jugaad(leftmostbook)].isbn,
+                      );
+                    },
+                  );
+                },
+                onDoubleTap: () {
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
@@ -162,7 +186,8 @@ class _HomePageState extends State<HomePage> {
                           duration: Durations.medium4));
                 },
                 child: Container(
-                  width: size.width * 0.4,
+                  height: size.height * 0.40,
+                  width: size.width * 0.45,
                   decoration: BoxDecoration(
                     color: Color(0xFFEBCEA6),
                     boxShadow: const [
@@ -182,6 +207,7 @@ class _HomePageState extends State<HomePage> {
                         AnimatedSwitcher(
                           duration: Duration(milliseconds: 500),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 key: ValueKey<int>(leftmostbook),
@@ -204,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 10),
                         LinearPercentIndicator(
                           barRadius: Radius.circular(20),
-                          width: size.width * 0.3,
+                          width: size.width * 0.25,
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 2500,
@@ -231,23 +257,25 @@ class _HomePageState extends State<HomePage> {
                             color: Color.fromARGB(255, 65, 65, 65),
                             fontWeight: FontWeight.normal,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          recentBooks[leftbook_jugaad(leftmostbook)].isbn,
-                          style: GoogleFonts.plusJakartaSans(
-                            textStyle: Theme.of(context).textTheme.bodySmall,
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 65, 65, 65),
-                            fontWeight: FontWeight.normal,
-                          ),
-                        )
+                        // Text(
+                        //   recentBooks[leftbook_jugaad(leftmostbook)].isbn,
+                        //   style: GoogleFonts.plusJakartaSans(
+                        //     textStyle: Theme.of(context).textTheme.bodySmall,
+                        //     fontSize: 15,
+                        //     color: Color.fromARGB(255, 65, 65, 65),
+                        //     fontWeight: FontWeight.normal,
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: size.height * 0.1,
+                height: size.height * 0.05,
               ),
               Positioned(
                 child: Row(
@@ -258,8 +286,8 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          height: size.width * 0.2,
-                          width: size.width * 0.2,
+                          height: size.width * 0.1,
+                          width: size.width * 0.1,
                           decoration: BoxDecoration(
                             color: Color(0xFFB64E3B),
                             boxShadow: const [
@@ -274,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                           child: Icon(
                             Icons.menu_book_outlined,
                             color: Colors.white,
-                            size: 40,
+                            size: 20,
                           ),
                         ),
                         Padding(
@@ -284,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.plusJakartaSans(
                               textStyle: Theme.of(context).textTheme.bodyMedium,
-                              fontSize: 18,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -295,8 +323,8 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          height: size.width * 0.2,
-                          width: size.width * 0.2,
+                          height: size.width * 0.1,
+                          width: size.width * 0.1,
                           decoration: BoxDecoration(
                             color: Color(0xFFB64E3B),
                             boxShadow: const [
@@ -311,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                           child: Icon(
                             Icons.phonelink,
                             color: Colors.white,
-                            size: 40,
+                            size: 20,
                           ),
                         ),
                         Padding(
@@ -321,7 +349,7 @@ class _HomePageState extends State<HomePage> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.plusJakartaSans(
                               textStyle: Theme.of(context).textTheme.bodyMedium,
-                              fontSize: 18,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -332,8 +360,8 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          height: size.width * 0.2,
-                          width: size.width * 0.2,
+                          height: size.width * 0.1,
+                          width: size.width * 0.1,
                           decoration: BoxDecoration(
                             color: Color(0xFFB64E3B),
                             boxShadow: const [
@@ -348,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                           child: Icon(
                             Icons.cruelty_free_outlined,
                             color: Colors.white,
-                            size: 40,
+                            size: 20,
                           ),
                         ),
                         Padding(
@@ -358,7 +386,7 @@ class _HomePageState extends State<HomePage> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.plusJakartaSans(
                               textStyle: Theme.of(context).textTheme.bodyMedium,
-                              fontSize: 18,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -419,11 +447,12 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton: Stack(
+      floatingActionButton: 
+      Stack(
         children: [
           Positioned(
             right: -130,
-            top: size.height * 0.3,
+            top: size.height * 0.4,
             child: GestureDetector(
               onPanUpdate: _onPanUpdate,
               onPanEnd: _onPanEnd,
@@ -432,8 +461,8 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      width: 320,
-                      height: 320,
+                      width: size.width * 0.75,
+                      height: size.width * 0.75,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -543,13 +572,6 @@ Widget MenuTile(
                 ),
               ),
             ),
-            // LinearPercentIndicator(
-            //   barRadius: Radius.circular(20),
-            //   width: 80.0,
-            //   lineHeight: 8.0,
-            //   percent: 0.43,
-            //   progressColor: Colors.black,
-            // )
           ],
         ),
       ),

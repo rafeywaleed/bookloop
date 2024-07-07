@@ -39,7 +39,6 @@ dependencies:
   google_nav_bar: ^5.0.6
   http: ^0.13.0
   page_transition: ^2.1.0
-  pdf_text: ^0.5.0
   percent_indicator: ^4.2.3
 
 dev_dependencies:
