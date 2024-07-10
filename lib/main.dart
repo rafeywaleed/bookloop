@@ -1,4 +1,4 @@
-import 'package:bookloop/homepage.dart';
+import 'package:bookloop/homepageIndex.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Demo',
-      home: HomePage(),
+      home: HomePageIndex(),
     );
   }
 }
