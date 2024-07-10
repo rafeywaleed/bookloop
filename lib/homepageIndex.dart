@@ -18,7 +18,8 @@ class HomePageIndex extends StatefulWidget {
   State<HomePageIndex> createState() => _HomePageIndexState();
 }
 
-class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProviderStateMixin{
+class _HomePageIndexState extends State<HomePageIndex>
+    with SingleTickerProviderStateMixin {
   double angle = 0;
   int leftmostbook = 2;
   int pageIndex = 0;
@@ -154,86 +155,85 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
         title: Text("[AppName]"),
       ),
       backgroundColor: Color(0xFFE4D9D3),
-      body: Stack(
-        children:[
-            Positioned(
-          right: -130,
-          top: size.height * 0.2,
-          child: GestureDetector(
-            onPanUpdate: _onPanUpdate,
-            onPanEnd: _onPanEnd,
-            child: Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: size.width * 0.75,
-                    height: size.width * 0.75,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFFC38560).withOpacity(0.8),
-                        boxShadow: const [
-                          BoxShadow(
-                              offset: Offset(0, 4),
-                              blurRadius: 4,
-                              spreadRadius: 0,
-                              color: Colors.grey)
-                        ]),
-                    child: Transform.rotate(
-                      angle: angle,
-                      child: AnimatedSwitcher(
-                        duration: Duration(milliseconds: 500),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: recentBooks.asMap().entries.map((entry) {
-                            int index = entry.key;
-                            Book book = entry.value;
-                            String isbn = entry.value.isbn;
+      // floatingActionButton: Stack(children: [
+      //   Positioned(
+      //     right: -130,
+      //     top: size.height * 0.3,
+      //     child: GestureDetector(
+      //       onPanUpdate: _onPanUpdate,
+      //       onPanEnd: _onPanEnd,
+      //       child: Center(
+      //         child: Stack(
+      //           alignment: Alignment.center,
+      //           children: [
+      //             Container(
+      //               width: size.width * 0.75,
+      //               height: size.width * 0.75,
+      //               alignment: Alignment.center,
+      //               decoration: BoxDecoration(
+      //                   shape: BoxShape.circle,
+      //                   color: Color(0xFFC38560).withOpacity(0.8),
+      //                   boxShadow: const [
+      //                     BoxShadow(
+      //                         offset: Offset(0, 4),
+      //                         blurRadius: 4,
+      //                         spreadRadius: 0,
+      //                         color: Colors.grey)
+      //                   ]),
+      //               child: Transform.rotate(
+      //                 angle: angle,
+      //                 child: AnimatedSwitcher(
+      //                   duration: Duration(milliseconds: 500),
+      //                   child: Stack(
+      //                     alignment: Alignment.center,
+      //                     children: recentBooks.asMap().entries.map((entry) {
+      //                       int index = entry.key;
+      //                       Book book = entry.value;
+      //                       String isbn = entry.value.isbn;
 
-                            return MenuTile(
-                              snapAngles[index],
-                              angle,
-                              book,
-                              isbn,
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFE4D9D3),
-                    ),
-                    child: Center(
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(0xFF8A4A3E),
-                            boxShadow: const [
-                              BoxShadow(
-                                  offset: Offset(0, 4),
-                                  blurRadius: 4,
-                                  spreadRadius: 0,
-                                  color: Colors.grey)
-                            ]),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-          
-          
-           SingleChildScrollView(
+      //                       return MenuTile(
+      //                         snapAngles[index],
+      //                         angle,
+      //                         book,
+      //                         isbn,
+      //                       );
+      //                     }).toList(),
+      //                   ),
+      //                 ),
+      //               ),
+      //             ),
+      //             Container(
+      //               height: 100,
+      //               width: 100,
+      //               decoration: BoxDecoration(
+      //                 shape: BoxShape.circle,
+      //                 color: Color(0xFFE4D9D3),
+      //               ),
+      //               child: Center(
+      //                 child: Container(
+      //                   width: 40,
+      //                   height: 40,
+      //                   decoration: BoxDecoration(
+      //                       shape: BoxShape.circle,
+      //                       color: Color(0xFF8A4A3E),
+      //                       boxShadow: const [
+      //                         BoxShadow(
+      //                             offset: Offset(0, 4),
+      //                             blurRadius: 4,
+      //                             spreadRadius: 0,
+      //                             color: Colors.grey)
+      //                       ]),
+      //                 ),
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ]),
+      body: Stack(children: [
+        SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
@@ -254,7 +254,8 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
                         TextSpan(
                           text: "Rafey",
                           style: GoogleFonts.plusJakartaSans(
-                              textStyle: Theme.of(context).textTheme.displayLarge,
+                              textStyle:
+                                  Theme.of(context).textTheme.displayLarge,
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF8D3F33)),
@@ -271,9 +272,10 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
                       builder: (BuildContext context) {
                         return BookDialog(
                           cover: Image.network(
-                              recentBooks[leftbook_jugaad(leftmostbook)].imgUrl),
-                          title:
-                              recentBooks[leftbook_jugaad(leftmostbook)].bookName,
+                              recentBooks[leftbook_jugaad(leftmostbook)]
+                                  .imgUrl),
+                          title: recentBooks[leftbook_jugaad(leftmostbook)]
+                              .bookName,
                           author:
                               recentBooks[leftbook_jugaad(leftmostbook)].author,
                           type: recentBooks[leftbook_jugaad(leftmostbook)].type,
@@ -283,15 +285,6 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
                     );
                   },
                   onDoubleTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => BookDetailsPage(
-                    //               isbn: recentBooks[leftbook_jugaad(leftmostbook)]
-                    //                   .isbn,
-                    //               type: recentBooks[leftbook_jugaad(leftmostbook)]
-                    //                   .type,
-                    //             )));
                     Navigator.push(
                         context,
                         PageTransition(
@@ -431,7 +424,8 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
                               "Add a\nPrint Book",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.plusJakartaSans(
-                                textStyle: Theme.of(context).textTheme.bodyMedium,
+                                textStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -468,7 +462,8 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
                               "Add an\nE-Book",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.plusJakartaSans(
-                                textStyle: Theme.of(context).textTheme.bodyMedium,
+                                textStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -505,7 +500,8 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
                               "Invite a\nFriend",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.plusJakartaSans(
-                                textStyle: Theme.of(context).textTheme.bodyMedium,
+                                textStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -520,11 +516,85 @@ class _HomePageIndexState extends State<HomePageIndex> with SingleTickerProvider
             ),
           ),
         ),
-        ]
-      ),
+        Stack(children: [
+          Positioned(
+            right: -130,
+            top: size.height * 0.2,
+            child: GestureDetector(
+              onPanUpdate: _onPanUpdate,
+              onPanEnd: _onPanEnd,
+              child: Center(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: size.width * 0.75,
+                      height: size.width * 0.75,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFFC38560).withOpacity(0.8),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(0, 4),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                                color: Colors.grey)
+                          ]),
+                      child: Transform.rotate(
+                        angle: angle,
+                        child: AnimatedSwitcher(
+                          duration: Duration(milliseconds: 500),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: recentBooks.asMap().entries.map((entry) {
+                              int index = entry.key;
+                              Book book = entry.value;
+                              String isbn = entry.value.isbn;
 
-
-bottomNavigationBar: Padding(
+                              return MenuTile(
+                                snapAngles[index],
+                                angle,
+                                book,
+                                isbn,
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFFE4D9D3),
+                      ),
+                      child: Center(
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFF8A4A3E),
+                              boxShadow: const [
+                                BoxShadow(
+                                    offset: Offset(0, 4),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                    color: Colors.grey)
+                              ]),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ]),
+      ]),
+      bottomNavigationBar: Padding(
         padding: EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
@@ -543,146 +613,11 @@ bottomNavigationBar: Padding(
               ],
             ),
           ),
-        ),),
-
-
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Community'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-      //   ],
-      // ),
-      // bottomNavigationBar: Padding(
-      //     padding: EdgeInsets.all(8.0),
-      //     child: Container(
-      //         decoration: BoxDecoration(
-      //           borderRadius: BorderRadius.circular(20),
-      //           color: Color(0xFF445C74),
-      //         ),
-      //         child: Padding(
-      //           padding: EdgeInsets.all(8.0),
-      //           child: BottomNavigationBar(
-      //             elevation: 0,
-      //             backgroundColor: Color(0xFF445C74),
-      //             selectedItemColor: Color.fromARGB(255, 223, 223, 223),
-      //             unselectedItemColor: Color.fromARGB(255, 142, 142, 142),
-      //             showSelectedLabels: true,
-      //             showUnselectedLabels: false,
-      //             currentIndex: pageIndex,
-      //             onTap: onTabTapped,
-      //             items: [
-      //               BottomNavigationBarItem(
-      //                 icon: Icon(Icons.home, size: 30),
-      //                backgroundColor: Color(0xFF445C74),
-      //                 label: 'Home',
-      //               ),
-      //               BottomNavigationBarItem(
-      //                 icon: Icon(Icons.menu_book_sharp, size: 30),
-      //                 label: 'Books',
-      //               ),
-      //               BottomNavigationBarItem(
-      //                 icon: Icon(Icons.people_alt_outlined, size: 30),
-      //                 label: 'Social',
-      //               ),
-      //               BottomNavigationBarItem(
-      //                 icon: Icon(Icons.person_pin, size: 30),
-      //                 label: 'Profile',
-      //               ),
-      //             ],
-      //           ),
-      //         ))),
-
-
-      //floatingActionButton: pageIndex == 0 ? buildCircularMenu() : null,
-    );
-    
-  }
-
-  buildCircularMenu() {
-    var size = MediaQuery.of(context).size;
-    Stack(
-      children: [
-        Positioned(
-          right: -130,
-          top: size.height * 0.4,
-          child: GestureDetector(
-            onPanUpdate: _onPanUpdate,
-            onPanEnd: _onPanEnd,
-            child: Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: size.width * 0.75,
-                    height: size.width * 0.75,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFFC38560).withOpacity(0.8),
-                        boxShadow: const [
-                          BoxShadow(
-                              offset: Offset(0, 4),
-                              blurRadius: 4,
-                              spreadRadius: 0,
-                              color: Colors.grey)
-                        ]),
-                    child: Transform.rotate(
-                      angle: angle,
-                      child: AnimatedSwitcher(
-                        duration: Duration(milliseconds: 500),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: recentBooks.asMap().entries.map((entry) {
-                            int index = entry.key;
-                            Book book = entry.value;
-                            String isbn = entry.value.isbn;
-
-                            return MenuTile(
-                              snapAngles[index],
-                              angle,
-                              book,
-                              isbn,
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFE4D9D3),
-                    ),
-                    child: Center(
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(0xFF8A4A3E),
-                            boxShadow: const [
-                              BoxShadow(
-                                  offset: Offset(0, 4),
-                                  blurRadius: 4,
-                                  spreadRadius: 0,
-                                  color: Colors.grey)
-                            ]),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ),
-      ],
+      ),
     );
   }
-  
+
   Widget buildNavItem(IconData icon, String text, int index) {
     bool isSelected = pageIndex == index;
 
@@ -693,14 +628,18 @@ bottomNavigationBar: Padding(
         curve: Curves.easeOutExpo,
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
         decoration: BoxDecoration(
-          color: isSelected ? Color.fromARGB(95, 230, 230, 230) : Colors.transparent,
+          color: isSelected
+              ? Color.fromARGB(95, 230, 230, 230)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Row(
           children: [
             Icon(
               icon,
-              color: isSelected ? Colors.white : Color.fromARGB(255, 216, 216, 216),
+              color: isSelected
+                  ? Colors.white
+                  : Color.fromARGB(255, 216, 216, 216),
               size: 30,
             ),
             SizedBox(width: 8),
