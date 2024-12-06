@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1016944723693",
+    "project_id": "bookloop-c1e49",
+    "storage_bucket": "bookloop-c1e49.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016944723693:android:b9495a9672f51d7ccfaee4",
+        "android_client_info": {
+          "package_name": "com.example.bookloop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016944723693-o3r29739mh8n57i5i0h1uvg56h82lqgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6v3U23URhKW3S6KB0WfpA6ulMoxsYfbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016944723693-o3r29739mh8n57i5i0h1uvg56h82lqgc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1016944723693-2b7higanjmb5bg32lqgjt3l78tumi8e0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.vocsy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
