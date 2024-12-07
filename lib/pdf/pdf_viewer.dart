@@ -48,7 +48,7 @@ class _PdfViewerPageState extends State<PdfViewerPage>
 
   void _searchPdf() {
     setState(() {
-     // _showScrollHead = false;
+      // _showScrollHead = false;
       _showToolbar = true;
       _ensureHistoryEntry();
     });
@@ -71,7 +71,7 @@ class _PdfViewerPageState extends State<PdfViewerPage>
 
   double _zoomLevel = 1;
 
-  void _onZoomLevelChange(double newZoom){
+  void _onZoomLevelChange(double newZoom) {
     setState(() {
       _zoomLevel = newZoom;
     });
@@ -190,7 +190,8 @@ class _PdfViewerPageState extends State<PdfViewerPage>
   }
 
   void addHighlightAnnotation() {
-    List<PdfTextLine>? textLines = _pdfViewerKey.currentState?.getSelectedTextLines();
+    List<PdfTextLine>? textLines =
+        _pdfViewerKey.currentState?.getSelectedTextLines();
     if (textLines != null && textLines.isNotEmpty) {
       final HighlightAnnotation highlightAnnotation = HighlightAnnotation(
         textBoundsCollection: textLines,
@@ -198,6 +199,7 @@ class _PdfViewerPageState extends State<PdfViewerPage>
       _pdfViewerController.addAnnotation(highlightAnnotation);
     }
   }
+
   void removeFirstAnnotation() {
     // Get the list of annotations in the PDF document.
     List<Annotation> annotations = _pdfViewerController.getAnnotations();
@@ -313,7 +315,7 @@ class _PdfViewerPageState extends State<PdfViewerPage>
     _pdfViewerController.annotationMode = PdfAnnotationMode.none;
   }
 
-   void addStickyNoteAnnotation() {
+  void addStickyNoteAnnotation() {
     final StickyNoteAnnotation stickyNote = StickyNoteAnnotation(
       pageNumber: 1, // Change this to the current page number
       text: 'This is a sticky note annotation',
@@ -322,8 +324,6 @@ class _PdfViewerPageState extends State<PdfViewerPage>
     );
     _pdfViewerController.addAnnotation(stickyNote);
   }
-
-  
 
   void customizeDefaultStickyNoteSettings() {
     // Obtain the default sticky note annotation settings from the PdfViewerController instance.
@@ -347,19 +347,19 @@ class _PdfViewerPageState extends State<PdfViewerPage>
     }
   }
 
-bool _nightMode = false;
-  Color _highlightColor = Colors.yellow; 
+  bool _nightMode = false;
+  Color _highlightColor = Colors.yellow;
   void _toggleNightMode() {
     setState(() {
       _nightMode = !_nightMode;
     });
   }
-    void _changeHighlightColor(Color color) {
+
+  void _changeHighlightColor(Color color) {
     setState(() {
       _highlightColor = color;
     });
   }
-
 
   Future<void> _loadPdf() async {
     _pdfViewerController = PdfViewerController();
@@ -390,7 +390,7 @@ bool _nightMode = false;
   void _toggleFullScreen() {
     setState(() {
       _isFullScreen = !_isFullScreen;
-     // _showScrollHead = _isFullScreen;
+      // _showScrollHead = _isFullScreen;
 
       if (_isFullScreen) {
         // Save current zoom level when entering fullscreen
@@ -481,12 +481,10 @@ bool _nightMode = false;
         body: Stack(
           children: [
             SfPdfViewer.file(
-
-              
               File(widget.filePath),
-             onZoomLevelChanged: (PdfZoomDetails details) {
-              _onZoomLevelChange(details.newZoomLevel);
-            },
+              onZoomLevelChanged: (PdfZoomDetails details) {
+                _onZoomLevelChange(details.newZoomLevel);
+              },
               onTap: (PdfGestureDetails details) {
                 print('${details.pageNumber}');
                 _toggleFullScreen();
@@ -548,7 +546,7 @@ bool _nightMode = false;
               onPageChanged: (PdfPageChangedDetails details) {
                 setState(() {
                   _currentPage = details.newPageNumber;
-                   _pdfViewerController.zoomLevel = _zoomLevel;
+                  _pdfViewerController.zoomLevel = _zoomLevel;
                 });
               },
             ),
@@ -591,7 +589,6 @@ bool _nightMode = false;
                     left: 0,
                     right: 0,
                     child: PdfAppBar(
-
                       title: 'Pdf',
                       showToolBar: _showToolbar,
                       controller: _pdfViewerController,
@@ -610,7 +607,7 @@ bool _nightMode = false;
                       isHorizontalScroll: _isHorizontalScroll,
                     ),
                   ),
-                   if (!_isFullScreen)
+            if (!_isFullScreen)
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -625,7 +622,7 @@ bool _nightMode = false;
 
             // // The NavBar
             // _isFullScreen
-            //     ? SizedBox.shrink() 
+            //     ? SizedBox.shrink()
             //     : Positioned(
             //         bottom: 0,
             //         left: 0,

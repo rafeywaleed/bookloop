@@ -1,9 +1,10 @@
 import 'package:bookloop/auth/sign_in.dart';
+import 'package:bookloop/homepage.dart';
+import 'package:bookloop/widgets/auth_text_field.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/auth_text_field.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -28,7 +29,6 @@ class _RegisterState extends State<Register> {
         setState(() {
           usernameExists = true;
         });
-        // username.clear();
         return true;
       } else {
         setState(() {
@@ -99,11 +99,20 @@ class _RegisterState extends State<Register> {
                   if (!(await checkDocumentExists('users', username.text))) {
                     await FirebaseAuth.instance.createUserWithEmailAndPassword(
                         email: email.text, password: password.text);
-                    if (FirebaseAuth.instance.currentUser != null) {
+                    if (FirebaseAuth.instance.currentUser != null &&
+                        context.mounted) {
                       FirebaseFirestore.instance
                           .collection('users')
-                          .doc(username.text)
-                          .set({'name': name.text, 'email': email.text});
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .set({
+                        'name': name.text,
+                        'username': username.text,
+                        'email': email.text
+                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
                     }
                   }
                 },

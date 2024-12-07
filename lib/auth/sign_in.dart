@@ -1,7 +1,8 @@
 import 'package:bookloop/auth/register.dart';
+import 'package:bookloop/homepage.dart';
+import 'package:bookloop/widgets/auth_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/auth_text_field.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -49,7 +50,17 @@ class _SignInState extends State<SignIn> {
                     minimumSize: const Size(double.maxFinite, 60),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
-                onPressed: () {},
+                onPressed: () async {
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: email.text, password: password.text);
+                  if (FirebaseAuth.instance.currentUser != null &&
+                      context.mounted) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
+                  }
+                },
                 child: const Text('Sign In')),
             const SizedBox(
               height: 10,

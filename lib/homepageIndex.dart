@@ -594,27 +594,27 @@ class _HomePageIndexState extends State<HomePageIndex>
           ),
         ]),
       ]),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Color(0xFF445C74),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                buildNavItem(Icons.home, 'Home', 0),
-                buildNavItem(Icons.menu_book_sharp, 'Books', 1),
-                buildNavItem(Icons.people_alt_outlined, 'Social', 2),
-                buildNavItem(Icons.person_pin, 'Profile', 3),
-              ],
-            ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Padding(
+      //   padding: EdgeInsets.all(8.0),
+      //   child: Container(
+      //     decoration: BoxDecoration(
+      //       borderRadius: BorderRadius.circular(20),
+      //       color: Color(0xFF445C74),
+      //     ),
+      //     child: Padding(
+      //       padding: EdgeInsets.all(8.0),
+      //       child: Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //         children: [
+      //           buildNavItem(Icons.home, 'Home', 0),
+      //           buildNavItem(Icons.menu_book_sharp, 'Books', 1),
+      //           buildNavItem(Icons.people_alt_outlined, 'Social', 2),
+      //           buildNavItem(Icons.person_pin, 'Profile', 3),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 
