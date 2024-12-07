@@ -1,8 +1,9 @@
 import 'package:bookloop/auth/sign_in.dart';
-import 'package:bookloop/widgets/text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/auth_text_field.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
