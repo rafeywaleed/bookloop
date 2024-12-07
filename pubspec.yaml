@@ -37,7 +37,7 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^4.0.4
   google_nav_bar: ^5.0.6
-  http: ^0.13.0
+  http: ^1.0.0
   page_transition: ^2.1.0
   percent_indicator: ^4.2.3
   chatview: ^1.2.1
@@ -50,7 +50,7 @@ dependencies:
   permission_handler: ^11.3.1
   provider: ^6.1.2
   readmore: ^3.0.0
-  file_picker: ^8.1.4
+  file_picker: ^5.3.2
   syncfusion_flutter_pdfviewer: ^27.1.53
 
 dev_dependencies:
